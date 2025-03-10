@@ -1,0 +1,128 @@
+/* 전체 스타일 */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* ✅ Header 스타일 */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: white;
+  padding: 15px 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ✅ 로고 스타일 */
+.logo img {
+  height: 30px;
+  width: 100px;
+}
+
+/* ✅ 네비게이션 스타일 */
+.nav-links-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* ✅ 버튼 스타일 */
+#schedule-call {
+  background-color: #f5f5f5;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#schedule-call:hover {
+  background-color: #e0e0e0;
+  text-decoration: none;
+  color: black;
+}
+
+/* ✅ 섹션 기본 스타일 */
+.section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ✅ 섹션별 배경색 (임시) */
+#home {
+  background-color: #f8b400;
+}
+#opportunity {
+  background-color: #ff6363;
+}
+#technology {
+  background-color: #7ed6df;
+}
+#business {
+  background-color: #6ab04c;
+}
+#team {
+  background-color: #eb4d4b;
+}
+#funds {
+  background-color: #f9ca24;
+}
+#invest {
+  background-color: #e056fd;
+}
+
+/* ✅ Footer 스타일 */
+footer {
+  height: 100px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}

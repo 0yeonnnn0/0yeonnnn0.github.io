@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bestia - Invest With Us</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <nav>
+        <div class="logo">
+          <a href="#home">
+            <img src="assets/images/Bestia_lg_black.svg" alt="Bestia Logo" />
+          </a>
+        </div>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a class="nav-link" href="#home">Home</a></li>
+            <li><a class="nav-link" href="#opportunity">Opportunity</a></li>
+            <li><a class="nav-link" href="#technology">Technology</a></li>
+            <li><a class="nav-link" href="#business">Business Model</a></li>
+            <li><a class="nav-link" href="#team">Team</a></li>
+            <li><a class="nav-link" href="#funds">Use of Funds</a></li>
+            <li><a class="nav-link" href="#invest">Invest With Us</a></li>
+          </ul>
+          <a
+            href="https://calendly.com/marco-dykim/30min?month=2025-03"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="schedule-call"
+          >
+            Schedule a Call
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Sections -->
+    <main>
+      <section id="home" class="section">Home</section>
+      <section id="opportunity" class="section">Opportunity</section>
+      <section id="technology" class="section">Technology</section>
+      <section id="business" class="section">Business Model</section>
+      <section id="team" class="section">Team</section>
+      <section id="funds" class="section">Use of Funds</section>
+      <section id="invest" class="section">Invest With Us</section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Bestia Inc.</p>
+    </footer>
+
+    <script>
+      // 새로고침 시 스크롤 최상단으로 이동
+      history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+      
+      if (window.location.hash) {
+        history.replaceState('', document.title, window.location.pathname);
+      }
+
+      // 부드러운 스크롤 효과
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // 섹션 애니메이션 효과
+      const sections = document.querySelectorAll(".section");
+
+      const observerOptions = {
+        root: null,
+        rootMargin: "-50px",
+        threshold: 0.15,
+      };
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => {
+        sectionObserver.observe(section);
+      });
+    </script>
+  </body>
+</html>

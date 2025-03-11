@@ -3,6 +3,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: url(../../assets/images/opportunity/bg.svg);
+  height: 100%;
+  padding: 60px;
 }
 
 .opportunity-title {
@@ -13,6 +16,7 @@
   font-style: normal;
   font-weight: 700;
   line-height: 160%; /* 32px */
+  margin-bottom: 60px;
 }
 
 .gradient-text {

@@ -1,0 +1,83 @@
+.team-content-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+}
+.team-content-bottom-item {
+  display: flex;
+  position: relative;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  height: 373px;
+  overflow: visible;
+  gap: 40px; /* 요소들 사이 간격 */
+  padding: 0 40px; /* 좌우 패딩 */
+}
+
+#vak {
+  background-image: url(../../assets/images/team/card_vak_bg.svg);
+}
+
+#mike {
+  background-image: url(../../assets/images/team/card_mike_dusi_bg.svg);
+}
+
+.team-content-bottom-item img {
+  width: 456px;
+  height: 494px;
+  width: auto;
+  object-fit: cover;
+}
+
+.team-content-bottom-item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 100%;
+}
+
+.team-content-bottom-item-content h2 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.team-content-bottom-item-content p {
+  font-size: 20px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.team-content-bottom-item button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 3;
+  align-self: center; /* 버튼 수직 중앙 정렬 */
+}
+
+/* reverse 클래스를 위한 새로운 스타일 */
+.team-content-bottom-item.reverse {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.team-content-bottom-item.reverse img {
+  right: 0;
+  left: auto;
+}
+
+.team-content-bottom-item.reverse .team-content-bottom-item-content {
+  right: auto;
+  left: 100px;
+  text-align: left;
+}

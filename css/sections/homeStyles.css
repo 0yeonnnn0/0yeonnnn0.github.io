@@ -2,14 +2,21 @@
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 0;
+  padding: 85px 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 60px;
+  background-image: url(../../assets/images/home/bg.svg);
+  background-size: cover;
+  background-position: center 55px; /* X축은 center로 유지, Y축을 85px 아래로 이동 */
+  background-repeat: no-repeat;
 }
 
 /* 메인 타이틀 */
 .home-content h2 {
-  width: 822px;
+  width: 800px;
   color: #000;
   font-family: "Rethink Sans";
   font-size: 44px;

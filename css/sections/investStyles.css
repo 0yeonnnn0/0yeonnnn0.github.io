@@ -1,0 +1,67 @@
+.invest-container {
+  background-image: url(../../assets/images/invest/bg.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 644px;
+  padding: 100px 0;
+}
+
+.invest-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 483px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 60px 240px;
+  gap: 60px;
+}
+
+.invest-content h1 {
+  display: flex;
+  height: 75px;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  color: #000;
+  text-align: center;
+  font-family: "Rethink Sans";
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%; /* 102.4px */
+}
+
+.invest-content p {
+  display: flex;
+  height: 80px;
+  flex-direction: column;
+  justify-content: center;
+  align-self: stretch;
+  color: #000;
+  text-align: center;
+  font-family: Urbanist;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%; /* 38.4px */
+}
+
+.invest-content button {
+  display: flex;
+  padding: 26px 46px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 30px;
+  background: #03002a;
+  color: #fff;
+  font-family: Urbanist;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%; /* 51.2px */
+}

@@ -1,13 +1,14 @@
-#funds {
-  background-color: #f9ca24;
-}
-#invest {
-  background-color: #e056fd;
-}
-
 .section {
   width: 100%;
   min-height: 100vh;
+  overflow: visible;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.section-mini {
+  width: 100%;
+  min-height: 60vh;
   overflow: visible;
   opacity: 0;
   transform: translateY(20px);

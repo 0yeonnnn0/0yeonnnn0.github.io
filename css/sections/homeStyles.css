@@ -1,9 +1,10 @@
 .home-content {
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
+  margin: 85px auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 60px;
 }
 

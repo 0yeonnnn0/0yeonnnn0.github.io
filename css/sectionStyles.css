@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  min-height: 60vh;
+  min-height: 100vh;
   overflow: visible;
   opacity: 0;
   transform: translateY(20px);

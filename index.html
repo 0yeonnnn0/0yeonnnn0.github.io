@@ -330,7 +330,7 @@
           </div>
         </div>
       </section>
-      <section id="funds" class="section">
+      <section id="funds" class="section-mini">
         <div class="funds-container">
           <div class="funds-content">
             <img src="assets/images/fund/title.svg" alt="funds" />
@@ -410,15 +410,15 @@
               </div>
             </div>
             <div class="footer-content-right-bottom">
-              <span>Legal</span>
+              <a href="#">Legal</a>
               <span>|</span>
-              <span>Terms of Service</span>
+              <a href="#">Terms of Service</a>
               <span>|</span>
-              <span>Policy</span>
+              <a href="#">Policy</a>
               <span>|</span>
-              <span>Copyright</span>
+              <a href="#">Copyright</a>
               <span>|</span>
-              <div>Cookies</div>
+              <a href="#">Cookies</a>
             </div>
           </div>
         </div>
@@ -450,11 +450,16 @@
           e.preventDefault();
           const targetId = this.getAttribute("href");
           const targetElement = document.querySelector(targetId);
+          const headerOffset = 85;
 
           if (targetElement) {
-            targetElement.scrollIntoView({
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition =
+              elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
               behavior: "smooth",
-              block: "start",
             });
           }
         });
@@ -465,7 +470,7 @@
 
       const observerOptions = {
         root: null,
-        rootMargin: "-50px",
+        rootMargin: "-85px",
         threshold: 0.15,
       };
 

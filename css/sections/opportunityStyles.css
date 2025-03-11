@@ -1,0 +1,99 @@
+.opportunity-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.opportunity-title {
+  color: #000;
+  text-align: center;
+  font-family: "Rethink Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%; /* 32px */
+}
+
+.gradient-text {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.opportunity-content-top-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.opportunity-content-top-container p {
+  color: #000;
+  text-align: center;
+  font-family: Urbanist;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 32px */
+  margin-top: -10px;
+}
+.opportunity-content-container {
+  margin: 100px;
+}
+
+.opportunity-content-bottom-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.opportunity-content-bottom-container h2 {
+  color: #000;
+  font-family: "Rethink Sans";
+  font-size: 58px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%; /* 92.8px */
+}
+
+.opportunity-content-bottom-container p {
+  color: #000;
+  font-family: Urbanist;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 32px */
+}
+
+.opportunity-content-bottom-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.opportunity-content-bottom-list ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.opportunity-content-bottom-list ul li {
+  color: #000;
+  font-family: Urbanist;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 220%; /* 44px */
+}

@@ -1,0 +1,174 @@
+.home-content {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* 메인 타이틀 */
+.home-content h2 {
+  width: 822px;
+  color: #000;
+  font-family: "Rethink Sans";
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 61.6px */
+}
+
+.home-content h2 strong {
+  background: linear-gradient(90deg, #e45f23 0%, #0e00a1 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Rethink Sans";
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+.home-introduce-container {
+  display: flex;
+  width: 751px;
+  height: 340px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  flex-shrink: 0;
+}
+
+.home-introduce {
+  display: flex;
+  width: 753px;
+  height: 172px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.home-introduce p {
+  color: #000;
+  font-family: Urbanist;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 32px */
+}
+
+.home-introduce p strong {
+  font-weight: 600;
+}
+/* 피처 섹션 */
+.home-invest-button-container {
+  display: flex;
+  width: 344px;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}
+
+.home-invest-button-container button {
+  display: flex;
+  padding: 20px 50px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 15px;
+  background: #03002a;
+
+  color: #fff;
+  font-family: Urbanist;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%; /* 38.4px */
+}
+
+.home-invest-button-container p {
+  color: #000;
+  text-align: center;
+  font-family: Urbanist;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* 투자 회사 섹션 */
+.invested-company-container {
+  width: 100%;
+  margin-top: 40px;
+  background-color: #f1f3f7;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.invested-company-content {
+  display: flex;
+  width: 990px;
+  height: 130px;
+  flex-direction: column;
+  gap: 9px;
+  flex-shrink: 0;
+}
+
+.invested-company-list {
+  display: flex;
+  width: 988px;
+  height: 99px;
+  align-items: center;
+  gap: 60px;
+  flex-shrink: 0;
+}
+
+.invested-company-list img {
+  width: 192px;
+  height: 55px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.invested-company-list img:hover {
+  opacity: 1;
+}
+
+.invested-company-content h2 {
+  color: #a1a1a1;
+  text-align: center;
+  font-family: Urbanist;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 38.4px */
+}
+
+.invested-company-content h2 strong {
+  color: #2e2e2e;
+  font-family: Urbanist;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .home-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .home-introduce p {
+    font-size: 1.1rem;
+  }
+}

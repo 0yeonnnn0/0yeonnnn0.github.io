@@ -1,9 +1,54 @@
+.team-container {
+  padding-top: 100px;
+  background-image: url(../../assets/images/team/bg.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.team-content-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+.team-title {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.team-content-top h1 {
+  color: #000;
+  text-align: center;
+  font-family: "Rethink Sans";
+  font-size: 43px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%; /* 68.8px */
+  margin-top: -28px;
+}
+
+.team-content-top p {
+  color: #000;
+  text-align: center;
+  font-family: Urbanist;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%; /* 32px */
+}
+
 .team-content-bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 80px;
 }
+
 .team-content-bottom-item {
   display: flex;
   position: relative;
@@ -13,7 +58,7 @@
   height: 373px;
   overflow: visible;
   gap: 40px; /* 요소들 사이 간격 */
-  padding: 0 40px; /* 좌우 패딩 */
+  padding: 0 120px; /* 좌우 패딩 */
 }
 
 #vak {
@@ -35,31 +80,39 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   color: white;
   height: 100%;
 }
 
 .team-content-bottom-item-content h2 {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  color: #fff;
+  font-family: Urbanist;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%; /* 128px */
 }
 
 .team-content-bottom-item-content p {
-  font-size: 20px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.9);
+  color: #fff;
+  font-family: Urbanist;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .team-content-bottom-item button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 3;
-  align-self: center; /* 버튼 수직 중앙 정렬 */
+  align-self: center;
+}
+
+.team-content-bottom-item button img {
+  border-radius: 100%;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* reverse 클래스를 위한 새로운 스타일 */

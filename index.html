@@ -472,10 +472,13 @@
               </div>
             </ul>
             <div class="launch-timer">
-              <p>Time until launch</p>
-              <div class="timer-display">
-                <span id="days">00</span>d <span id="hours">00</span>h
-                <span id="minutes">00</span>m <span id="seconds">00</span>s
+              <div class="timer-box">
+                <div class="timer-content">
+                  <p>Launch on 1. June</p>
+                  <div class="timer-display">
+                    <span>00:00:00</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -529,12 +532,13 @@
             </div>
 
             <div class="launch-timer">
-              <p>Time until launch</p>
-              <div class="timer-display">
-                <span id="parcelity-days">00</span>d
-                <span id="parcelity-hours">00</span>h
-                <span id="parcelity-minutes">00</span>m
-                <span id="parcelity-seconds">00</span>s
+              <div class="timer-box">
+                <div class="timer-content">
+                  <p>Launch on 1. June</p>
+                  <div class="timer-display">
+                    <span>00:00:00</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -588,12 +592,13 @@
               </p>
             </div>
             <div class="launch-timer">
-              <p>Time until launch</p>
-              <div class="timer-display">
-                <span id="openapn-days">00</span>d
-                <span id="openapn-hours">00</span>h
-                <span id="openapn-minutes">00</span>m
-                <span id="openapn-seconds">00</span>s
+              <div class="timer-box">
+                <div class="timer-content">
+                  <p>Launch on 1. June</p>
+                  <div class="timer-display">
+                    <span>00:00:00</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -643,12 +648,13 @@
               </p>
             </div>
             <div class="launch-timer">
-              <p>Time until launch</p>
-              <div class="timer-display">
-                <span id="thehomeoffer-days">00</span>d
-                <span id="thehomeoffer-hours">00</span>h
-                <span id="thehomeoffer-minutes">00</span>m
-                <span id="thehomeoffer-seconds">00</span>s
+              <div class="timer-box">
+                <div class="timer-content">
+                  <p>Launch on 1. June</p>
+                  <div class="timer-display">
+                    <span>00:00:00</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -709,7 +715,7 @@
             </p>
             <p>
               His deep market insight and hands-on experience set him apart in
-              the industry, making him a driving force behind Bestia’s
+              the industry, making him a driving force behind Bestia's
               AI-powered real estate innovation.
             </p>
           </div>
@@ -741,7 +747,7 @@
               ecosystem to redefine real estate transactions. Previously, he
               co-founded CreatorIQ, pioneering enterprise-grade influencer
               marketing solutions used by Fortune 500 companies. His expertise
-              continues to drive Bestia’s vision for the future of real estate.
+              continues to drive Bestia's vision for the future of real estate.
             </p>
           </div>
         </div>
@@ -867,36 +873,24 @@
 
       // 타이머 기능 추가
       function updateTimer() {
-        const launchDate = new Date("2024-12-31").getTime(); // 런칭 날짜 설정
-        const now = new Date().getTime();
-        const distance = launchDate - now;
+        // 모든 타이머 요소들을 00으로 설정
+        const timerIds = [
+          'days', 'hours', 'minutes', 'seconds',
+          'parcelity-days', 'parcelity-hours', 'parcelity-minutes', 'parcelity-seconds',
+          'openapn-days', 'openapn-hours', 'openapn-minutes', 'openapn-seconds',
+          'thehomeoffer-days', 'thehomeoffer-hours', 'thehomeoffer-minutes', 'thehomeoffer-seconds'
+        ];
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        document.getElementById("days").textContent = String(days).padStart(
-          2,
-          "0"
-        );
-        document.getElementById("hours").textContent = String(hours).padStart(
-          2,
-          "0"
-        );
-        document.getElementById("minutes").textContent = String(
-          minutes
-        ).padStart(2, "0");
-        document.getElementById("seconds").textContent = String(
-          seconds
-        ).padStart(2, "0");
+        timerIds.forEach(id => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.textContent = '00';
+          }
+        });
       }
 
-      // 1초마다 타이머 업데이트
-      setInterval(updateTimer, 1000);
-      updateTimer(); // 초기 실행
+      // 초기 실행만 하고 더 이상 업데이트하지 않음
+      updateTimer();
     </script>
   </body>
 </html>

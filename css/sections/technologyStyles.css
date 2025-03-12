@@ -159,17 +159,23 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  justify-content: center;
 }
 
 .modal-left-content {
   display: flex;
   flex-direction: column;
   gap: 40px;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-left img {
-  max-width: 200px;
+  max-width: 273px;
   height: auto;
+  align-self: center;
 }
 
 .modal-description {
@@ -180,34 +186,64 @@
 }
 
 .launch-timer {
-  margin-top: auto;
-  text-align: center;
+  margin-top: 40px;
 }
 
-.launch-timer p {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
+.timer-box {
+  display: flex;
+  height: 89px;
+  padding: 24px 64px; /* 패딩 상하 24px, 좌우 32px로 증가 */
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 10px;
+  background: var(
+    --tech-pannel,
+    linear-gradient(110deg, #ff6f2d 0.99%, #1001a0 99.04%)
+  );
+}
+
+.timer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* 전체 너비 사용 */
+}
+
+.timer-content p {
+  color: white;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .timer-display {
-  font-size: 24px;
-  font-weight: bold;
-  color: #FF6F2D;
+  width: 100%; /* 전체 너비 사용 */
 }
 
 .timer-display span {
-  margin: 0 5px;
+  color: #fff;
+  text-align: center;
+  font-family: Urbanist;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  display: block; /* 블록 레벨로 변경하여 text-align 적용 */
 }
 
 /* 모달 우측 */
 .modal-right {
   width: 60%;
-  background: #6E6E6E;
+  background: #dce0e3;
   padding: 40px;
-  color: white;
   display: flex;
   flex-direction: column;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  justify-content: center;
+  position: relative;
 }
 
 .feature-section {
@@ -241,21 +277,21 @@
 }
 
 .website-link {
-  margin-top: auto;
-  display: inline-block;
-  padding: 12px 24px;
-  background: white;
-  color: #6E6E6E;
-  text-decoration: none;
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  color: #6e6e6e;
+  text-decoration: underline;
   font-weight: 600;
-  border-radius: 5px;
-  text-align: center;
+  font-size: 14px;
   transition: all 0.3s ease;
+  background: none;
+  padding: 0;
 }
 
 .website-link:hover {
-  background: #FF6F2D;
-  color: white;
+  color: #ff6f2d;
+  background: none;
 }
 
 /* 모달 닫기 버튼 위치 조정 */

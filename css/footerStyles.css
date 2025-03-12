@@ -5,7 +5,7 @@ footer {
   justify-content: center;
   width: 100%;
   min-height: 60vh;
-  padding: 80px 240px 40px ;
+  padding: 80px 240px 40px;
 }
 
 .footer-content {
@@ -41,7 +41,7 @@ footer {
   flex-direction: column;
   gap: 20px;
 }
-.footer-content-top-left-button-container > button:first-child {
+.footer-content-top-left-button-container > a:first-child {
   display: flex;
   padding: 10px 17px;
   justify-content: center;
@@ -59,7 +59,7 @@ footer {
   line-height: 160%; /* 32px */
 }
 
-.footer-content-top-left-button-container > button:last-child {
+.footer-content-top-left-button-container > a:last-child {
   display: flex;
   padding: 10px 17px;
   justify-content: center;
@@ -119,7 +119,7 @@ footer {
   align-self: stretch;
 }
 
-.footer-our-products-container-item span {
+.footer-our-products-container-item a {
   color: #000;
   font-family: Urbanist;
   font-size: 20px;

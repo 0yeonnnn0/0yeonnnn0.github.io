@@ -89,7 +89,7 @@
             <div class="invested-company-content">
               <div class="invested-company-list">
                 <img
-                  src="assets/images/invested-company/DataBricks_logo.svg"
+                  src="assets/images/invested-company/Databricks_logo.svg"
                   alt="DataBricks"
                 />
                 <img
@@ -139,7 +139,7 @@
           </div>
 
           <div class="opportunity-content-container">
-            <h1>하이염 ㅋㅋ</h1>
+            <img src="assets/images/opportunity/file.svg" alt="opportunity" />
           </div>
 
           <div class="opportunity-content-bottom-container">
@@ -194,7 +194,7 @@
           </div>
           <div class="technology-content">
             <div class="technology-item-container">
-              <div class="technology-content-item">
+              <div class="technology-content-item" data-modal-id="propverified">
                 <div class="technology-content-item-content">
                   <img
                     src="assets/images/technology-company/PropVerified_logo.svg"
@@ -210,7 +210,7 @@
                   </div>
                 </div>
               </div>
-              <div class="technology-content-item">
+              <div class="technology-content-item" data-modal-id="parcelity">
                 <div class="technology-content-item-content">
                   <img
                     src="assets/images/technology-company/Parcelity_logo.svg"
@@ -226,7 +226,7 @@
                   </div>
                 </div>
               </div>
-              <div class="technology-content-item">
+              <div class="technology-content-item" data-modal-id="openapn">
                 <div class="technology-content-item-content">
                   <img
                     src="assets/images/technology-company/OpenAPN_logo.svg"
@@ -242,7 +242,7 @@
                   </div>
                 </div>
               </div>
-              <div class="technology-content-item">
+              <div class="technology-content-item" data-modal-id="thehomeoffer">
                 <div class="technology-content-item-content">
                   <img
                     src="assets/images/technology-company/TheHomeOffer_logo.svg"
@@ -386,8 +386,13 @@
             <div class="footer-content-left-top-container">
               <h2>Connect With Us</h2>
               <div class="footer-content-top-left-button-container">
-                <button>Schedule a Call</button>
-                <button>Contact Support</button>
+                <a
+                  href="https://calendly.com/marco-dykim/30min?month=2025-03"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><button>Schedule a Call</button></a
+                >
+                <a><button>Contact Support</button></a>
               </div>
             </div>
             <div class="footer-content-top-left-icon-container">
@@ -417,14 +422,14 @@
             />
             <div class="footer-our-products-container">
               <div class="footer-our-products-container-item">
-                <span>PropVerified</span>
-                <span>Parcelity</span>
-                <span>OpenAPN</span>
+                <a href="#">PropVerified</a>
+                <a href="#">Parcelity</a>
+                <a href="#">OpenAPN</a>
               </div>
               <div class="footer-our-products-container-item">
-                <span>BestiaPlatforms</span>
-                <span>TheHomeOffer</span>
-                <span>MikeDusi</span>
+                <a href="#">BestiaPlatforms</a>
+                <a href="#">TheHomeOffer</a>
+                <a href="#">MikeDusi</a>
               </div>
             </div>
             <div class="footer-content-right-bottom">
@@ -445,6 +450,309 @@
         <p>&copy; 2025 Bestia Inc.</p>
       </div>
     </footer>
+
+    <!-- 모달 컴포넌트들 - body 직계 자식으로 이동 -->
+    <div class="technology-modal" id="modal-propverified">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="modal-left">
+          <div class="modal-left-content">
+            <img
+              src="assets/images/technology-company/PropVerified_logo.svg"
+              alt="PropVerified"
+            />
+            <ul class="modal-description">
+              <div>
+                <p class="technology-content-item-headline">
+                  All property data in one place
+                </p>
+                <p class="technology-content-item-subtext">
+                  accurate, verified, real-time
+                </p>
+              </div>
+            </ul>
+            <div class="launch-timer">
+              <div class="timer-box">
+                <div class="timer-content">
+                  <p>Launch on 1. June</p>
+                  <div class="timer-display">
+                    <span>00:00:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-right">
+          <div class="feature-section">
+            <h3>Key Features</h3>
+            <ul>
+              <li>Every property detail enhanced</li>
+              <li>Market insights to understand values and trends</li>
+              <li>All relevant data points in one place</li>
+              <li>Comprehensive data integration & real‐time validation</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3>User Benefits</h3>
+            <ul>
+              <li>Increased confidence in investment decisions</li>
+              <li>Reduced risk from outdated information</li>
+              <li>Faster due diligence</li>
+            </ul>
+          </div>
+          <a
+            href="#"
+            class="website-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GO TO WEBSITE
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="technology-modal" id="modal-parcelity">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="modal-left">
+          <div class="modal-left-content">
+            <img
+              src="assets/images/technology-company/Parcelity_logo.svg"
+              alt="Parcelity"
+            />
+            <div class="modal-description">
+              <p class="technology-content-item-headline">
+                Ask anything about real estate
+              </p>
+              <p class="technology-content-item-subtext">
+                AI-driven market intelligence
+              </p>
+            </div>
+
+            <div class="launch-timer">
+              <div class="timer-box">
+                <div class="timer-content">
+                  <p>Launch on 1. June</p>
+                  <div class="timer-display">
+                    <span>00:00:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-right">
+          <div class="feature-section">
+            <h3>Key Features</h3>
+            <ul>
+              <li>AI beyond basic Q&A</li>
+              <li>Market intelligence & complex analysis</li>
+              <li>Decision‐making guidance in real time</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3>User Benefits</h3>
+            <ul>
+              <li>Structured data</li>
+              <li>Advanced AI</li>
+              <li>Real estate experience</li>
+              <li>(1,000+ years combined, or your chosen tagline)</li>
+              <li>Scalable infrastructure</li>
+            </ul>
+          </div>
+          <a
+            href="#"
+            class="website-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GO TO WEBSITE
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="technology-modal" id="modal-openapn">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="modal-left">
+          <div class="modal-left-content">
+            <img
+              src="assets/images/technology-company/OpenAPN_logo.svg"
+              alt="OpenAPN"
+            />
+            <div class="modal-description">
+              <p class="technology-content-item-headline">
+                The AWS of real estate
+              </p>
+              <p class="technology-content-item-subtext">
+                scalable infrastructure for innovation
+              </p>
+            </div>
+            <div class="launch-timer">
+              <div class="timer-box">
+                <div class="timer-content">
+                  <p>Launch on 1. June</p>
+                  <div class="timer-display">
+                    <span>00:00:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-right">
+          <div class="feature-section">
+            <h3>Key Features</h3>
+            <ul>
+              <li>Complete build environment infrastructure</li>
+              <li>Modern API ecosystem for real estate projects</li>
+              <li>Instant deployment & infinite scalability</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3>User Benefits</h3>
+            <ul>
+              <li>Reduced complexity</li>
+              <li>Faster implementation</li>
+              <li>Lower costs & future‐proof stack</li>
+            </ul>
+          </div>
+          <a
+            href="#"
+            class="website-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GO TO WEBSITE
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="technology-modal" id="modal-thehomeoffer">
+      <div class="modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="modal-left">
+          <div class="modal-left-content">
+            <img
+              src="assets/images/technology-company/TheHomeOffer_logo.svg"
+              alt="TheHomeOffer"
+            />
+            <div class="modal-description">
+              <p class="technology-content-item-headline">
+                The One-Stop Shop for<br />
+                Real Estate Dealmaking
+              </p>
+            </div>
+            <div class="launch-timer">
+              <div class="timer-box">
+                <div class="timer-content">
+                  <p>Launch on 1. June</p>
+                  <div class="timer-display">
+                    <span>00:00:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-right">
+          <div class="feature-section">
+            <h3>Key Features</h3>
+            <ul>
+              <li>Unparalleled deal-making infrastructure</li>
+              <li>
+                Full onboarding and deal-making paperwork pre-authorized by all
+                associations and governances
+              </li>
+              <li>Instant buying and selling</li>
+            </ul>
+          </div>
+          <div class="feature-section">
+            <h3>User Benefits</h3>
+            <ul>
+              <li>No agents</li>
+              <li>No closing costs</li>
+              <li>Lower cost and fully streamlined</li>
+            </ul>
+          </div>
+          <a
+            href="#"
+            class="website-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GO TO WEBSITE
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team 모달 컴포넌트들 -->
+    <div class="team-modal" id="modal-mike">
+      <img src="assets/images/team/mike_dusi_detail.svg" alt="Mike Dusi" />
+      <!-- <div class="team-modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="team-modal-left">
+          <img src="assets/images/team/mike_dusi_pic.png" alt="Mike Dusi" />
+        </div>
+        <div class="team-modal-right">
+          <div class="team-modal-header">
+            <h2>Mike Dusi</h2>
+            <p>Entrepreneur, real estate investor</p>
+            <p>Bestia Co-Founder</p>
+          </div>
+          <div class="team-modal-description">
+            <p>
+              Mike Dusi is a seasoned real estate investor and strategist with
+              over 20 years of expertise in deal-making, negotiation, and market
+              growth. He specializes in revitalizing distressed properties,
+              structuring creative financing, and maximizing investment
+              potential in residential and multi-unit assets.
+            </p>
+            <p>
+              His deep market insight and hands-on experience set him apart in
+              the industry, making him a driving force behind Bestia's
+              AI-powered real estate innovation.
+            </p>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="team-modal" id="modal-vak">
+      <img src="assets/images/team/vak_sambath_detail.svg" alt="Vak Sambath" />
+      <!-- <div class="team-modal-content">
+        <button class="modal-close">&times;</button>
+        <div class="team-modal-left">
+          <img src="assets/images/team/vak_sambath_pic.png" alt="Vak Sambath" />
+        </div>
+        <div class="team-modal-right">
+          <div class="team-modal-header">
+            <h2>Vak Sambath</h2>
+            <p>20+ years in tech, serial entrepreneur</p>
+            <p>Bestia Co-Founder</p>
+          </div>
+          <div class="team-modal-description">
+            <p>
+              Vak Sambath is a technology innovator and entrepreneur with 20+
+              years of experience building transformative platforms across tech
+              media, e-learning, finance, and real estate.
+            </p>
+            <p>
+              As the leader of Bestia Group, he is developing an AI-powered
+              ecosystem to redefine real estate transactions. Previously, he
+              co-founded CreatorIQ, pioneering enterprise-grade influencer
+              marketing solutions used by Fortune 500 companies. His expertise
+              continues to drive Bestia's vision for the future of real estate.
+            </p>
+          </div>
+        </div>
+      </div> -->
+    </div>
 
     <script>
       // Home 템플릿 로드
@@ -503,6 +811,86 @@
       sections.forEach((section) => {
         sectionObserver.observe(section);
       });
+
+      // 모달 관련 JavaScript
+      document.addEventListener("DOMContentLoaded", function () {
+        const modalTriggers = document.querySelectorAll(
+          ".technology-content-item"
+        );
+        const modals = document.querySelectorAll(
+          ".technology-modal, .team-modal"
+        );
+        const closeButtons = document.querySelectorAll(".modal-close");
+
+        const handleModalOpen = (modalId) => {
+          const modal = document.getElementById(`modal-${modalId}`);
+          if (modal) {
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
+          }
+        };
+
+        const handleModalClose = () => {
+          modals.forEach((modal) => {
+            modal.classList.remove("active");
+          });
+          document.body.style.overflow = "";
+        };
+
+        modalTriggers.forEach((trigger) => {
+          trigger.addEventListener("click", () => {
+            const modalId = trigger.dataset.modalId;
+            handleModalOpen(modalId);
+          });
+        });
+
+        const teamMembers = document.querySelectorAll("#mike, #vak");
+        teamMembers.forEach((member) => {
+          member.addEventListener("click", () => {
+            const modalId = member.id;
+            handleModalOpen(modalId);
+          });
+        });
+
+        closeButtons.forEach((button) => {
+          button.addEventListener("click", handleModalClose);
+        });
+
+        modals.forEach((modal) => {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+              handleModalClose();
+            }
+          });
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            handleModalClose();
+          }
+        });
+      });
+
+      // 타이머 기능 추가
+      function updateTimer() {
+        // 모든 타이머 요소들을 00으로 설정
+        const timerIds = [
+          'days', 'hours', 'minutes', 'seconds',
+          'parcelity-days', 'parcelity-hours', 'parcelity-minutes', 'parcelity-seconds',
+          'openapn-days', 'openapn-hours', 'openapn-minutes', 'openapn-seconds',
+          'thehomeoffer-days', 'thehomeoffer-hours', 'thehomeoffer-minutes', 'thehomeoffer-seconds'
+        ];
+
+        timerIds.forEach(id => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.textContent = '00';
+          }
+        });
+      }
+
+      // 초기 실행만 하고 더 이상 업데이트하지 않음
+      updateTimer();
     </script>
   </body>
 </html>

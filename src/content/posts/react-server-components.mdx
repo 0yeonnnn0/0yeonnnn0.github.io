@@ -1,0 +1,33 @@
+---
+title: "React Server Components가 바꿔놓을 것들"
+date: 2026-02-20
+category: "프론트엔드"
+tags: ["React", "RSC", "서버컴포넌트"]
+description: "React Server Components의 핵심 개념과 기존 SSR과의 차이점, 그리고 프론트엔드 아키텍처에 미칠 영향을 정리합니다."
+series: "frontend-deep-dive"
+seriesOrder: 2
+views: 7230
+---
+
+## SSR과 뭐가 다른가
+
+SSR은 서버에서 HTML을 만들어 보내고 클라이언트에서 hydration합니다. RSC는 서버에서 실행되는 컴포넌트와 클라이언트에서 실행되는 컴포넌트를 명시적으로 구분합니다.
+
+## 번들 사이즈의 혁명
+
+서버 컴포넌트의 코드는 클라이언트 번들에 포함되지 않습니다. `moment.js`를 서버 컴포넌트에서만 사용하면 클라이언트에는 0KB입니다.
+
+## 데이터 페칭의 변화
+
+컴포넌트 안에서 직접 `await db.query()`를 할 수 있습니다. API 레이어가 사라지는 것이죠.
+
+```tsx
+async function PostList() {
+  const posts = await db.query('SELECT * FROM posts');
+  return posts.map(post => <PostItem key={post.id} post={post} />);
+}
+```
+
+## 아직 남은 과제
+
+캐싱 전략, 스트리밍, 에러 바운더리와의 조합 등 실전에서 풀어야 할 문제가 남아 있습니다.

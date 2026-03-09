@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = post.data.date.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const readingTime = Math.ceil(post.body!.split(/\s+/).length / 200);
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={post.data.thumbnail}
+  type="article"
+  publishedTime={post.data.date.toISOString()}
+>
+  <article class="max-w-[800px] mx-auto">
+    <header class="mb-10">
+      <div class="flex items-center gap-2 font-ui text-[0.92rem] text-[var(--color-text-secondary)] mb-3">
+        <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
+        <span>&middot;</span>
+        <span>{readingTime}분 읽기</span>
+      </div>
+      <h1 class="font-body text-[clamp(1.8rem,3.5vw,2.5rem)] font-bold leading-[1.25] tracking-[-0.016em] text-[var(--color-text-primary)]">
+        {post.data.title}
+      </h1>
+      <div class="flex items-center gap-2 mt-4 font-ui text-sm text-[var(--color-text-secondary)]">
+        <span>{post.data.category}</span>
+        {post.data.tags.length > 0 && (
+          <>
+            <span>&middot;</span>
+            {post.data.tags.map((tag) => (
+              <a href={`/tags/${tag}/`} class="text-[var(--color-secondary)] no-underline hover:underline">
+                #{tag}
+              </a>
+            ))}
+          </>
+        )}
+      </div>
+    </header>
+
+    <div class="prose font-body text-[1rem] leading-[1.8] text-[var(--color-text-primary)]">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

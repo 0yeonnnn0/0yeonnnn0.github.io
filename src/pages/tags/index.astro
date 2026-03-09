@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const tagMap = new Map<string, number>();
+posts.forEach((post) => {
+  post.data.tags.forEach((tag) => {
+    tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
+  });
+});
+const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<BaseLayout title="Tags" description="태그 목록">
+  <div class="max-w-[800px] mx-auto">
+    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-8">
+      Tags
+    </h1>
+    <div class="flex flex-wrap gap-3">
+      {tags.map(([tag, count]) => (
+        <a
+          href={`/tags/${tag}/`}
+          class="font-ui text-sm px-4 py-2 rounded-[5px] border border-[var(--color-divider)] text-[var(--color-text-secondary)] no-underline hover:bg-[var(--color-action-hover)] transition-colors"
+        >
+          #{tag} <span class="text-[var(--color-text-disabled)]">({count})</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

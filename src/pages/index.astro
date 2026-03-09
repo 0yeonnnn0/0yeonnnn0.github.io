@@ -1,0 +1,16 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import Hero from '@/widgets/hero/Hero.astro';
+import SteadySellers from '@/widgets/steady-sellers/SteadySellers.astro';
+import RecentBooks from '@/widgets/book-list/RecentBooks.astro';
+import RecentPosts from '@/widgets/post-list/RecentPosts.astro';
+---
+
+<BaseLayout>
+  <Hero />
+  <div class="max-w-[1000px] mx-auto flex flex-col gap-12">
+    <RecentBooks />
+    <SteadySellers />
+    <RecentPosts />
+  </div>
+</BaseLayout>

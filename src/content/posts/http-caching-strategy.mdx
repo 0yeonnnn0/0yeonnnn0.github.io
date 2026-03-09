@@ -1,0 +1,41 @@
+---
+title: "HTTP 캐싱 전략: Cache-Control 완전 정복"
+date: 2026-01-20
+category: "네트워크"
+tags: ["HTTP", "캐싱", "성능최적화"]
+description: "Cache-Control 헤더의 각 디렉티브가 무엇을 의미하는지, 실전에서 어떤 캐싱 전략을 써야 하는지 체계적으로 정리합니다."
+series: "web-developer-essentials"
+seriesOrder: 3
+views: 2156
+---
+
+## 왜 캐싱이 중요한가
+
+같은 리소스를 매번 다운로드하는 것은 시간과 대역폭의 낭비입니다. HTTP 캐싱은 웹 성능의 근본입니다.
+
+## Cache-Control 디렉티브
+
+```
+Cache-Control: max-age=31536000, immutable
+Cache-Control: no-cache
+Cache-Control: no-store
+Cache-Control: private, max-age=600
+```
+
+- **max-age**: 캐시 유효 시간 (초)
+- **no-cache**: 캐시하되, 매번 서버에 검증
+- **no-store**: 아예 캐시하지 않음
+- **immutable**: 유효 기간 내 재검증 안 함
+
+## 실전 전략
+
+| 리소스 | 전략 |
+|--------|------|
+| HTML | `no-cache` |
+| CSS/JS (해시 포함) | `max-age=31536000, immutable` |
+| API 응답 | `private, max-age=0, must-revalidate` |
+| 이미지 | `max-age=86400` |
+
+## ETag와 조건부 요청
+
+`ETag` + `If-None-Match` 조합으로 변경된 경우에만 전체 리소스를 받을 수 있습니다. 304 Not Modified 응답은 본문이 없으므로 매우 빠릅니다.

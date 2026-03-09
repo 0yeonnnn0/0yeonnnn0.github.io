@@ -1,0 +1,45 @@
+---
+title: "Docker, 왜 쓰는지부터 이해하자"
+date: 2026-01-25
+category: "데브옵스"
+tags: ["Docker", "컨테이너", "인프라"]
+description: "Docker가 해결하는 문제가 무엇인지, 가상머신과 어떻게 다른지, 그리고 실제로 어떻게 사용하는지 기초부터 정리합니다."
+series: "practical-devops"
+seriesOrder: 1
+views: 5102
+---
+
+## "내 컴퓨터에서는 되는데"
+
+이 문장이 Docker가 필요한 이유의 전부입니다. 환경의 차이를 없애는 것, 그것이 컨테이너의 핵심입니다.
+
+## 가상머신과의 차이
+
+가상머신은 OS 전체를 가상화하지만, Docker는 호스트 OS의 커널을 공유합니다. 그래서 가볍고 빠릅니다.
+
+## 기본 명령어
+
+```bash
+# 이미지 빌드
+docker build -t my-app .
+
+# 컨테이너 실행
+docker run -p 3000:3000 my-app
+
+# 실행 중인 컨테이너 확인
+docker ps
+```
+
+## Dockerfile 작성하기
+
+```dockerfile
+FROM node:22-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+CMD ["npm", "start"]
+```
+
+레이어 캐싱을 활용하기 위해 `package.json`을 먼저 복사하는 것이 핵심입니다.

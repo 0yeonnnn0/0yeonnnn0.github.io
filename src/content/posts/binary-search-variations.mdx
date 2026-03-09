@@ -1,0 +1,46 @@
+---
+title: "이분 탐색의 변형들: lower bound, upper bound"
+date: 2026-01-15
+category: "알고리즘"
+tags: ["이분탐색", "알고리즘", "코딩테스트"]
+description: "기본 이분 탐색을 넘어서 lower bound, upper bound, parametric search까지. 경계 조건을 헷갈리지 않는 방법을 정리합니다."
+views: 2984
+---
+
+## 기본 이분 탐색
+
+정렬된 배열에서 target을 찾는 가장 기본적인 형태입니다.
+
+```python
+def binary_search(arr, target):
+    lo, hi = 0, len(arr) - 1
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    return -1
+```
+
+## Lower Bound
+
+target **이상**인 첫 번째 위치를 찾습니다.
+
+```python
+def lower_bound(arr, target):
+    lo, hi = 0, len(arr)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if arr[mid] < target:
+            lo = mid + 1
+        else:
+            hi = mid
+    return lo
+```
+
+## Parametric Search
+
+"조건을 만족하는 최솟값/최댓값"을 구하는 문제에 활용합니다. 결정 문제로 바꾸는 것이 핵심입니다.

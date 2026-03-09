@@ -1,0 +1,15 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import { SITE } from '@/shared/config/site';
+---
+
+<BaseLayout title="About" description={`${SITE.author} 소개`}>
+  <div class="max-w-[800px] mx-auto">
+    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-8">
+      About
+    </h1>
+    <div class="font-body text-[1.143rem] leading-[1.7] text-[var(--color-text-primary)]">
+      <p>이 페이지는 준비 중입니다.</p>
+    </div>
+  </div>
+</BaseLayout>

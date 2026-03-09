@@ -1,0 +1,49 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import PostListItem from '@/widgets/post-list/PostListItem.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '@/data/categories';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return CATEGORIES.map((category) => ({
+    params: { category },
+    props: {
+      category,
+      posts: posts
+        .filter((p) => p.data.category === category)
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    },
+  }));
+}
+
+const { category, posts } = Astro.props;
+---
+
+<BaseLayout title={category} description={`"${category}" 카테고리의 글 목록`}>
+  <div class="max-w-[800px] mx-auto">
+    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-8">
+      {category}
+    </h1>
+
+    {posts.length === 0 ? (
+      <p class="font-ui text-[var(--color-text-secondary)]">이 카테고리에 작성된 글이 없습니다.</p>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+        {posts.map((post: any) => (
+          <div class="border-t border-[var(--color-divider)] first:border-t-0 md:border-t-0">
+            <PostListItem
+              id={post.id}
+              title={post.data.title}
+              description={post.data.description}
+              date={post.data.date}
+              category={post.data.category}
+              tags={post.data.tags}
+              thumbnail={post.data.thumbnail}
+            />
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>

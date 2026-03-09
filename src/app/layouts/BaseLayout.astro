@@ -1,0 +1,47 @@
+---
+import '@/app/styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
+import SEO from '@/widgets/seo/SEO.astro';
+import Header from '@/widgets/header/Header.astro';
+import Footer from '@/widgets/footer/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+}
+
+const { title, description, ogImage, type, publishedTime } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <SEO
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      type={type}
+      publishedTime={publishedTime}
+    />
+    <ViewTransitions />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1 w-full max-w-[1200px] mx-auto pt-32 pb-12 px-4 sm:px-6">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

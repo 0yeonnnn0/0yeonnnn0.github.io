@@ -1,0 +1,65 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '@/shared/config/site';
+
+const books = (await getCollection('books'))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const bookPostCounts = new Map<string, number>();
+for (const book of books) {
+  bookPostCounts.set(book.id, allPosts.filter((p) => p.data.series === book.id).length);
+}
+
+const bgColors = [
+  'from-[#e8e0d0] to-[#d5c6b0]',
+  'from-[#5a7a7e] to-[#4a6568]',
+  'from-[#b8c8cc] to-[#8fa8ab]',
+  'from-[#c8c4d8] to-[#a8a0c0]',
+  'from-[#4a8a8e] to-[#3a7a7e]',
+  'from-[#d8d0c0] to-[#c0b8a8]',
+];
+---
+
+<BaseLayout title="Books" description="주제별로 묶은 글 시리즈">
+  <div class="max-w-[1000px] mx-auto">
+    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-4">
+      Books
+    </h1>
+    <p class="font-ui text-[var(--color-text-secondary)] mb-10">
+      주제별로 묶은 글 시리즈입니다.
+    </p>
+
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-5">
+      {books.map((book, i) => (
+        <a href={`/books/${book.id}/`} class="group flex flex-col no-underline">
+          <div class="relative w-full aspect-[3/4] rounded-[3px] overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.12)]">
+            {book.data.cover ? (
+              <img
+                src={book.data.cover}
+                alt={book.data.title}
+                class="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+            ) : (
+              <div class={`absolute inset-0 bg-gradient-to-br ${bgColors[i % bgColors.length]}`} />
+            )}
+
+            <div class="absolute inset-x-[14%] inset-y-[18%] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] flex flex-col justify-between px-3 pt-3 pb-2.5">
+              <p class="font-body text-[0.8rem] font-bold leading-[1.4] text-[var(--color-text-primary)] line-clamp-3">
+                {book.data.title}
+              </p>
+              <p class="font-ui text-[0.7rem] text-[var(--color-text-secondary)]">
+                {SITE.author}
+              </p>
+            </div>
+          </div>
+          <p class="font-ui text-sm text-[var(--color-text-secondary)] mt-2">
+            {bookPostCounts.get(book.id) || 0} chapters
+          </p>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

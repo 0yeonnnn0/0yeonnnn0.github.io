@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import PostListItem from '@/widgets/post-list/PostListItem.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts
+        .filter((p) => p.data.tags.includes(tag))
+        .sort((a, b) => b.data.date.getTime() - a.data.date.getTime()),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`#${tag}`} description={`"${tag}" 태그의 글 목록`}>
+  <div class="max-w-[800px] mx-auto">
+    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-8">
+      #{tag}
+    </h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      {posts.map((post: any) => (
+        <div class="border-t border-[var(--color-divider)] first:border-t-0 md:border-t-0">
+          <PostListItem
+            id={post.id}
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            category={post.data.category}
+            tags={post.data.tags}
+            thumbnail={post.data.thumbnail}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

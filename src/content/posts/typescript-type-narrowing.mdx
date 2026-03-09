@@ -1,0 +1,42 @@
+---
+title: "TypeScript 타입 좁히기 완벽 가이드"
+date: 2026-03-01
+category: "프로그래밍"
+tags: ["TypeScript", "타입시스템", "타입가드"]
+description: "typeof, instanceof, in, discriminated union 등 TypeScript에서 타입을 좁히는 모든 방법을 예제와 함께 정리합니다."
+views: 6150
+---
+
+## 왜 타입 좁히기가 필요한가
+
+`string | number` 타입의 변수에 `.toUpperCase()`를 바로 호출할 수 없습니다. TypeScript에게 "이건 string이야"라고 알려줘야 합니다.
+
+## typeof 가드
+
+```ts
+function process(value: string | number) {
+  if (typeof value === 'string') {
+    return value.toUpperCase(); // OK
+  }
+  return value.toFixed(2); // OK
+}
+```
+
+## Discriminated Union
+
+```ts
+type Shape =
+  | { kind: 'circle'; radius: number }
+  | { kind: 'rect'; width: number; height: number };
+
+function area(shape: Shape): number {
+  switch (shape.kind) {
+    case 'circle':
+      return Math.PI * shape.radius ** 2;
+    case 'rect':
+      return shape.width * shape.height;
+  }
+}
+```
+
+이 패턴은 Redux 액션, API 응답 처리 등에서 매우 유용합니다.

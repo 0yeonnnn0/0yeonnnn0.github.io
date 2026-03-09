@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import { SITE } from '@/shared/config/site';
+
+const books = (await getCollection('books'))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const bgColors = [
+  'from-[#e8e0d0] to-[#d5c6b0]',
+  'from-[#5a7a7e] to-[#4a6568]',
+  'from-[#b8c8cc] to-[#8fa8ab]',
+  'from-[#c8c4d8] to-[#a8a0c0]',
+  'from-[#4a8a8e] to-[#3a7a7e]',
+  'from-[#d8d0c0] to-[#c0b8a8]',
+];
+---
+
+{books.length > 0 && (
+  <section>
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="font-body text-[1.5rem] font-bold leading-[1.6]">
+        Books
+      </h2>
+      <a
+        href="/books/"
+        class="font-body text-base text-[var(--color-text-secondary)] no-underline hover:underline"
+      >
+        View all &rarr;
+      </a>
+    </div>
+
+    <div class="flex gap-5 overflow-x-auto pb-6 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+      {books.map((book, i) => (
+        <a
+          href={`/books/${book.id}/`}
+          class="group flex-shrink-0 w-[140px] sm:w-[155px] no-underline snap-start"
+        >
+          <div class="relative w-full aspect-[3/4] rounded-[3px] overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.12)]">
+            {book.data.cover ? (
+              <img
+                src={book.data.cover}
+                alt={book.data.title}
+                class="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
+              />
+            ) : (
+              <div class={`absolute inset-0 bg-gradient-to-br ${bgColors[i % bgColors.length]}`} />
+            )}
+
+            {/* White overlay card — large, thin margin */}
+            <div class="absolute inset-x-[14%] inset-y-[18%] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] flex flex-col justify-between px-3 pt-3 pb-2.5">
+              <p class="font-body text-[0.8rem] font-bold leading-[1.4] text-[var(--color-text-primary)] line-clamp-3">
+                {book.data.title}
+              </p>
+              <p class="font-ui text-[0.7rem] text-[var(--color-text-secondary)]">
+                {SITE.author}
+              </p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+title: "RESTful API 설계에서 자주 하는 실수들"
+date: 2026-01-05
+category: "백엔드"
+tags: ["REST", "API설계", "백엔드"]
+description: "동사를 URL에 넣거나, 상태 코드를 무시하거나, 버전 관리를 안 하거나. REST API 설계 시 흔히 저지르는 실수들과 올바른 방향을 정리합니다."
+series: "web-developer-essentials"
+seriesOrder: 4
+views: 8934
+---
+
+## 실수 1: URL에 동사 넣기
+
+```
+❌ GET /getUsers
+❌ POST /createUser
+✅ GET /users
+✅ POST /users
+```
+
+HTTP 메서드가 이미 동사 역할을 합니다.
+
+## 실수 2: 항상 200 반환하기
+
+```json
+// ❌ 이러면 안 됩니다
+{ "status": 200, "error": "User not found" }
+```
+
+HTTP 상태 코드를 제대로 활용하세요. 404는 404로 보내야 합니다.
+
+## 실수 3: 중첩 리소스의 과도한 깊이
+
+```
+❌ /users/123/posts/456/comments/789/likes
+✅ /comments/789/likes
+```
+
+3단계 이상 중첩하면 클라이언트 구현이 복잡해집니다.
+
+## 실수 4: 페이지네이션 없이 전체 반환
+
+데이터가 10만 건이면 어떻게 할 건가요? cursor 기반 페이지네이션을 기본으로 가져가세요.

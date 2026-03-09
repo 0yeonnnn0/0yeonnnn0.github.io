@@ -1,0 +1,55 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  date: Date;
+  category: string;
+  tags: string[];
+  thumbnail?: string;
+}
+
+const { id, title, description, date, category, tags, thumbnail } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<article class="group">
+  <a
+    href={`/posts/${id}/`}
+    class="flex flex-col sm:flex-row gap-6 px-6 py-8 rounded-[12.5px] no-underline transition-colors duration-200 ease-in-out hover:bg-[rgba(0,0,0,0.01)]"
+  >
+    <div class="flex-1 min-w-0 flex flex-col">
+      <span class="font-ui text-[0.85rem] text-[var(--color-text-secondary)]">
+        {category}
+      </span>
+      <h3 class="font-body text-[clamp(1.2rem,2.2vw,1.5rem)] font-bold leading-[1.35] tracking-[-0.016em] text-[var(--color-text-primary)] mt-2">
+        {title}
+      </h3>
+      <p class="font-ui text-[clamp(0.92rem,1.2vw,1rem)] leading-[1.6] text-[var(--color-text-secondary)] mt-3 line-clamp-2">
+        {description}
+      </p>
+      <time
+        class="font-ui text-[0.85rem] tracking-[0.01em] text-[var(--color-text-secondary)] mt-5"
+        datetime={date.toISOString()}
+      >
+        {formattedDate}
+      </time>
+    </div>
+
+    {thumbnail && (
+      <div class="sm:w-44 sm:flex-shrink-0 order-first sm:order-last self-center">
+        <img
+          src={thumbnail}
+          alt={title}
+          class="w-full sm:w-44 aspect-[1.85/1] sm:aspect-[1/1] object-cover rounded-[2.5px]"
+          loading="lazy"
+        />
+      </div>
+    )}
+  </a>
+</article>

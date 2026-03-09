@@ -1,0 +1,105 @@
+---
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/posts/', label: 'Posts' },
+  { href: '/books/', label: 'Books' },
+  { href: '/about/', label: 'About' },
+];
+---
+
+<header
+  class="fixed top-0 left-1/2 z-300 -translate-x-1/2 w-full max-w-[1000px] h-24 flex items-center justify-end px-8 pt-[4px]"
+  style="background: var(--color-header-bg); backdrop-filter: blur(3px);"
+>
+  <nav class="hidden sm:flex items-center gap-12">
+    {navLinks.map(({ href, label }) => (
+      <a
+        href={href}
+        class:list={[
+          'font-body text-[1.05rem] tracking-wide text-[var(--color-text-secondary)] no-underline hover:underline transition-colors',
+          { 'text-[var(--color-text-primary)] font-medium': href === '/' ? pathname === '/' : pathname.startsWith(href) },
+        ]}
+      >
+        {label}
+      </a>
+    ))}
+    <!-- Dark mode toggle (placeholder) -->
+    <button
+      class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-[var(--color-action-hover)] transition-colors duration-150"
+      aria-label="다크모드 토글"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5" />
+        <line x1="12" y1="1" x2="12" y2="3" />
+        <line x1="12" y1="21" x2="12" y2="23" />
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+        <line x1="1" y1="12" x2="3" y2="12" />
+        <line x1="21" y1="12" x2="23" y2="12" />
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile hamburger -->
+  <button
+    id="mobile-menu-btn"
+    class="sm:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-[var(--color-action-hover)] transition-colors duration-150"
+    aria-label="메뉴 열기"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  </button>
+</header>
+
+<!-- Mobile menu overlay -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 z-299 hidden flex-col items-center justify-center gap-10"
+  style="background: var(--color-bg);"
+>
+  <button
+    id="mobile-menu-close"
+    class="absolute top-5 right-8 w-10 h-10 flex items-center justify-center rounded-full hover:bg-[var(--color-action-hover)]"
+    aria-label="메뉴 닫기"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18" />
+      <line x1="6" y1="6" x2="18" y2="18" />
+    </svg>
+  </button>
+
+  {navLinks.map(({ href, label }) => (
+    <a
+      href={href}
+      class:list={[
+        'font-body text-2xl text-[var(--color-text-primary)] no-underline',
+        { 'font-medium': href === '/' ? pathname === '/' : pathname.startsWith(href) },
+      ]}
+    >
+      {label}
+    </a>
+  ))}
+</div>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const closeBtn = document.getElementById('mobile-menu-close');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.remove('hidden');
+    menu?.classList.add('flex');
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    menu?.classList.add('hidden');
+    menu?.classList.remove('flex');
+  });
+</script>

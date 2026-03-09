@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import PostListItem from '@/widgets/post-list/PostListItem.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const books = await getCollection('books');
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+
+  return books.map((book) => {
+    const posts = allPosts
+      .filter((p) => p.data.series === book.id)
+      .sort((a, b) => (a.data.seriesOrder ?? 999) - (b.data.seriesOrder ?? 999));
+
+    return {
+      params: { slug: book.id },
+      props: { book, posts },
+    };
+  });
+}
+
+const { book, posts } = Astro.props;
+---
+
+<BaseLayout title={book.data.title} description={book.data.description}>
+  <div class="max-w-[800px] mx-auto">
+    <header class="mb-10">
+      <h1 class="font-body text-[clamp(1.8rem,3.5vw,2.5rem)] font-bold leading-[1.25] tracking-[-0.016em] text-[var(--color-text-primary)]">
+        {book.data.title}
+      </h1>
+      <p class="font-ui text-lg text-[var(--color-text-secondary)] mt-2">
+        {book.data.description}
+      </p>
+      <p class="font-ui text-sm text-[var(--color-text-secondary)] mt-1">
+        {posts.length}편의 글
+      </p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="font-ui text-[var(--color-text-secondary)]">아직 작성된 글이 없습니다.</p>
+    ) : (
+      <ol class="flex flex-col">
+        {posts.map((post: any, i: number) => (
+          <li class="border-t border-[var(--color-divider)] first:border-t-0">
+            <div class="flex items-start gap-4 py-2">
+              <span class="font-ui text-lg font-extrabold text-[#e0e0e0] min-w-8 pt-4 text-right">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div class="flex-1">
+                <PostListItem
+                  id={post.id}
+                  title={post.data.title}
+                  description={post.data.description}
+                  date={post.data.date}
+                  category={post.data.category}
+                  tags={post.data.tags}
+                  thumbnail={post.data.thumbnail}
+                />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    )}
+  </div>
+</BaseLayout>

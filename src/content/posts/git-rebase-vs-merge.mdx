@@ -1,0 +1,38 @@
+---
+title: "Git Rebase vs Merge: 언제 무엇을 쓸까"
+date: 2026-02-25
+category: "프로그래밍"
+tags: ["Git", "버전관리", "협업"]
+description: "rebase와 merge의 차이, 각각의 장단점, 그리고 실무에서 어떤 전략을 선택해야 하는지 구체적인 상황별로 정리합니다."
+views: 3421
+---
+
+## Merge
+
+```bash
+git checkout main
+git merge feature
+```
+
+히스토리를 있는 그대로 보존합니다. 머지 커밋이 생기지만, 언제 어떤 브랜치가 합쳐졌는지 명확합니다.
+
+## Rebase
+
+```bash
+git checkout feature
+git rebase main
+```
+
+커밋 히스토리를 직선으로 만듭니다. 깔끔하지만 공유된 브랜치에서는 위험합니다.
+
+## 실무 전략
+
+- **개인 feature 브랜치**: rebase로 최신 main 반영
+- **PR 머지**: squash merge 또는 merge commit
+- **이미 push한 브랜치**: force push 주의
+
+## 황금 규칙
+
+> 이미 다른 사람과 공유한 커밋은 절대 rebase하지 마세요.
+
+이 규칙만 지키면 rebase로 인한 사고를 방지할 수 있습니다.

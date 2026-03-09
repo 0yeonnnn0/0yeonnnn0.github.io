@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* ========================================
+   Design Tokens (CSS Custom Properties)
+   Based on Evan Moon blog design spec
+   ======================================== */
+
+@theme {
+  /* Light mode colors */
+  --color-bg: #FAF9F5;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #2C2B28;
+  --color-text-secondary: #6B6760;
+  --color-primary: #616161;
+  --color-secondary: #40C4FF;
+  --color-divider: rgba(0, 0, 0, 0.12);
+  --color-action-hover: rgba(0, 0, 0, 0.04);
+  --color-header-bg: rgba(250, 248, 245, 0.85);
+
+  /* Spacing (8px base) */
+  --spacing-1: 2px;
+  --spacing-2: 4px;
+  --spacing-3: 6px;
+  --spacing-4: 8px;
+  --spacing-6: 12px;
+  --spacing-8: 16px;
+  --spacing-10: 20px;
+  --spacing-12: 24px;
+  --spacing-16: 32px;
+  --spacing-20: 40px;
+  --spacing-24: 48px;
+  --spacing-32: 64px;
+  --spacing-40: 80px;
+
+  /* Border Radius */
+  --radius-sm: 2.5px;
+  --radius-md: 5px;
+  --radius-lg: 8px;
+  --radius-xl: 12.5px;
+  --radius-full: 50%;
+
+  /* Font families */
+  --font-body: "KoPub Batang", "Noto Serif", Georgia, serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-display: "Cormorant Garamond", "Noto Serif", serif;
+  --font-ui: "Pretendard Variable", Pretendard, "Helvetica Neue", Arial, sans-serif;
+  --font-code: "JetBrains Mono", Menlo, Monaco, "Source Code Pro", monospace;
+}
+
+/* ========================================
+   Base Styles
+   ======================================== */
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+/* ========================================
+   Font Loading
+   ======================================== */
+
+@font-face {
+  font-family: "KoPub Batang";
+  src: url("/fonts/KoPubBatang-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KoPub Batang";
+  src: url("/fonts/KoPubBatang-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "KoPub Batang";
+  src: url("/fonts/KoPubBatang-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   Scrollbar (subtle)
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-divider);
+  border-radius: 3px;
+}

@@ -1,0 +1,45 @@
+---
+title: "TypeScript를 쓰는 이유"
+date: 2026-03-09
+category: "프로그래밍"
+tags: ["TypeScript", "JavaScript", "타입시스템"]
+description: "JavaScript에서 TypeScript로 넘어간 이후 돌아갈 수 없게 된 이유를 정리합니다."
+draft: false
+---
+
+## JavaScript의 자유로움이라는 함정
+
+JavaScript는 자유롭다. 너무 자유롭다.
+
+```js
+const user = { name: "영연" };
+console.log(user.age.toString()); // 런타임에 터진다
+```
+
+이런 코드가 아무 경고 없이 실행되다가, 배포 후 새벽 3시에 슬랙 알림으로 돌아온다.
+
+## 타입이 주는 안정감
+
+TypeScript를 도입하면 이런 실수를 작성 시점에 잡을 수 있다.
+
+```ts
+interface User {
+  name: string;
+  age?: number;
+}
+
+const user: User = { name: "영연" };
+console.log(user.age?.toString()); // 안전하게 처리
+```
+
+코드를 작성하는 순간 에디터가 알려주니까, 디버깅에 쓸 시간을 기능 개발에 쓸 수 있다.
+
+## 리팩토링이 두렵지 않다
+
+프로젝트가 커질수록 함수 시그니처 하나 바꾸는 게 무서워진다. TypeScript는 변경의 영향 범위를 컴파일러가 전부 알려준다. `tsc --noEmit` 한 번이면 어디가 깨졌는지 바로 보인다.
+
+## 결론
+
+타입을 쓴다고 코드가 느려지지 않는다. 빌드 타임에 전부 사라지니까.
+
+대신 얻는 건 **자신감**이다. 내가 짠 코드가 의도대로 동작한다는 확신.

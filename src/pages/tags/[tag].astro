@@ -22,10 +22,10 @@ const { tag, posts } = Astro.props;
 
 <BaseLayout title={`#${tag}`} description={`"${tag}" 태그의 글 목록`}>
   <div class="max-w-[800px] mx-auto">
-    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-8">
+    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-4">
       #{tag}
     </h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
       {posts.map((post: any) => (
         <div class="border-t border-[var(--color-divider)] first:border-t-0 md:border-t-0">
           <PostListItem

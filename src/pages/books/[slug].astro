@@ -24,14 +24,14 @@ const { book, posts } = Astro.props;
 
 <BaseLayout title={book.data.title} description={book.data.description}>
   <div class="max-w-[800px] mx-auto">
-    <header class="mb-10">
+    <header class="mb-5">
       <h1 class="font-body text-[clamp(1.8rem,3.5vw,2.5rem)] font-bold leading-[1.25] tracking-[-0.016em] text-[var(--color-text-primary)]">
         {book.data.title}
       </h1>
-      <p class="font-ui text-lg text-[var(--color-text-secondary)] mt-2">
+      <p class="font-ui text-lg text-[var(--color-text-secondary)] mt-1">
         {book.data.description}
       </p>
-      <p class="font-ui text-sm text-[var(--color-text-secondary)] mt-1">
+      <p class="font-ui text-sm text-[var(--color-text-secondary)] mt-0.5">
         {posts.length}편의 글
       </p>
     </header>
@@ -42,8 +42,8 @@ const { book, posts } = Astro.props;
       <ol class="flex flex-col">
         {posts.map((post: any, i: number) => (
           <li class="border-t border-[var(--color-divider)] first:border-t-0">
-            <div class="flex items-start gap-4 py-2">
-              <span class="font-ui text-lg font-extrabold text-[#e0e0e0] min-w-8 pt-4 text-right">
+            <div class="flex items-start gap-2 py-1">
+              <span class="font-ui text-lg font-extrabold text-[#e0e0e0] min-w-4 pt-2 text-right">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div class="flex-1">

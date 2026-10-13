@@ -17,21 +17,6 @@
   --color-action-hover: rgba(0, 0, 0, 0.04);
   --color-header-bg: rgba(250, 248, 245, 0.85);
 
-  /* Spacing (8px base) */
-  --spacing-1: 2px;
-  --spacing-2: 4px;
-  --spacing-3: 6px;
-  --spacing-4: 8px;
-  --spacing-6: 12px;
-  --spacing-8: 16px;
-  --spacing-10: 20px;
-  --spacing-12: 24px;
-  --spacing-16: 32px;
-  --spacing-20: 40px;
-  --spacing-24: 48px;
-  --spacing-32: 64px;
-  --spacing-40: 80px;
-
   /* Border Radius */
   --radius-sm: 2.5px;
   --radius-md: 5px;

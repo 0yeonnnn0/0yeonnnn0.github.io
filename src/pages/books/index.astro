@@ -24,10 +24,10 @@ const bgColors = [
 
 <BaseLayout title="Books" description="주제별로 묶은 글 시리즈">
   <div class="max-w-[1000px] mx-auto">
-    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-4">
+    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-2">
       Books
     </h1>
-    <p class="font-ui text-[var(--color-text-secondary)] mb-10">
+    <p class="font-ui text-[var(--color-text-secondary)] mb-5">
       주제별로 묶은 글 시리즈입니다.
     </p>
 
@@ -46,7 +46,7 @@ const bgColors = [
               <div class={`absolute inset-0 bg-gradient-to-br ${bgColors[i % bgColors.length]}`} />
             )}
 
-            <div class="absolute inset-x-[14%] inset-y-[18%] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] flex flex-col justify-between px-3 pt-3 pb-2.5">
+            <div class="absolute inset-x-[14%] inset-y-[18%] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] flex flex-col justify-between px-1.5 pt-1.5 pb-2.5">
               <p class="font-body text-[0.8rem] font-bold leading-[1.4] text-[var(--color-text-primary)] line-clamp-3">
                 {book.data.title}
               </p>
@@ -55,7 +55,7 @@ const bgColors = [
               </p>
             </div>
           </div>
-          <p class="font-ui text-sm text-[var(--color-text-secondary)] mt-2">
+          <p class="font-ui text-sm text-[var(--color-text-secondary)] mt-1">
             {bookPostCounts.get(book.id) || 0} chapters
           </p>
         </a>

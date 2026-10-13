@@ -17,7 +17,7 @@ const bgColors = [
 
 {books.length > 0 && (
   <section>
-    <div class="flex items-center justify-between mb-8">
+    <div class="flex items-center justify-between mb-4">
       <h2 class="font-body text-[1.5rem] font-bold leading-[1.6]">
         Books
       </h2>
@@ -29,7 +29,7 @@ const bgColors = [
       </a>
     </div>
 
-    <div class="flex gap-5 overflow-x-auto pb-6 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
+    <div class="flex gap-5 overflow-x-auto pb-3 -mx-2 px-2 snap-x snap-mandatory scrollbar-hide">
       {books.map((book, i) => (
         <a
           href={`/books/${book.id}/`}
@@ -48,7 +48,7 @@ const bgColors = [
             )}
 
             {/* White overlay card — large, thin margin */}
-            <div class="absolute inset-x-[14%] inset-y-[18%] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] flex flex-col justify-between px-3 pt-3 pb-2.5">
+            <div class="absolute inset-x-[14%] inset-y-[18%] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] flex flex-col justify-between px-1.5 pt-1.5 pb-2.5">
               <p class="font-body text-[0.8rem] font-bold leading-[1.4] text-[var(--color-text-primary)] line-clamp-3">
                 {book.data.title}
               </p>

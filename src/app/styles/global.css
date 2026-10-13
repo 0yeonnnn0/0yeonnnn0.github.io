@@ -1,34 +1,79 @@
+/* ========================================
+   Web fonts (bundled by Vite)
+   - Pretendard: UI (dynamic subset, variable)
+   - Cormorant Garamond: display (latin, 400/600/700)
+   - JetBrains Mono: code (variable)
+   - Liminal Batang (KoPub바탕체 서브셋): body — self-hosted subset in /public/fonts (see @font-face below)
+   ======================================== */
+
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
+@import "@fontsource/cormorant-garamond/latin-400.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-700.css";
+@import "@fontsource-variable/jetbrains-mono/wght.css";
+
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* ========================================
    Design Tokens (CSS Custom Properties)
-   Based on Evan Moon blog design spec
+   Light theme lives in @theme; dark overrides are below.
+   `static` keeps every token emitted even when only used via var().
    ======================================== */
 
-@theme {
+@theme static {
   /* Light mode colors */
   --color-bg: #FAF9F5;
   --color-surface: #FFFFFF;
+  --color-card: #FFFFFF;
   --color-text-primary: #2C2B28;
   --color-text-secondary: #6B6760;
-  --color-primary: #616161;
-  --color-secondary: #40C4FF;
+  --color-text-muted: #E0E0E0;
+  /* Tag/link blue: 5.6:1 on --color-bg (WCAG AA) */
+  --color-secondary: #0369A1;
   --color-divider: rgba(0, 0, 0, 0.12);
   --color-action-hover: rgba(0, 0, 0, 0.04);
+  --color-row-hover: rgba(0, 0, 0, 0.03);
   --color-header-bg: rgba(250, 248, 245, 0.85);
+  --color-grid-line: #2C2B28;
+  --color-code-bg: rgba(0, 0, 0, 0.05);
 
   /* Border Radius */
   --radius-sm: 2.5px;
   --radius-md: 5px;
   --radius-lg: 8px;
-  --radius-xl: 12.5px;
   --radius-full: 50%;
 
   /* Font families */
-  --font-body: "KoPub Batang", "Noto Serif", Georgia, serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-body: "Liminal Batang", "Noto Serif KR", "AppleMyungjo", "Noto Serif", Georgia, serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-display: "Cormorant Garamond", "Noto Serif", serif;
   --font-ui: "Pretendard Variable", Pretendard, "Helvetica Neue", Arial, sans-serif;
-  --font-code: "JetBrains Mono", Menlo, Monaco, "Source Code Pro", monospace;
+  --font-code: "JetBrains Mono Variable", "JetBrains Mono", Menlo, Monaco, "Source Code Pro", monospace;
+}
+
+/* Dark theme — set by the inline script in BaseLayout (data-theme on <html>) */
+:root[data-theme="dark"] {
+  --color-bg: #1F1E1C;
+  --color-surface: #2A2926;
+  --color-card: #2A2926;
+  --color-text-primary: #ECE8E1;
+  --color-text-secondary: #ABA69D;
+  --color-text-muted: #3A3834;
+  --color-secondary: #7CC8F2;
+  --color-divider: rgba(255, 255, 255, 0.12);
+  --color-action-hover: rgba(255, 255, 255, 0.08);
+  --color-row-hover: rgba(255, 255, 255, 0.04);
+  --color-header-bg: rgba(31, 30, 28, 0.85);
+  --color-grid-line: #ECE8E1;
+  --color-code-bg: rgba(255, 255, 255, 0.08);
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 /* ========================================
@@ -48,32 +93,156 @@ body {
   line-height: 1.5;
 }
 
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-code);
+}
+
+/* Keyboard focus (links use no-underline, so this is the only cue) */
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
 /* ========================================
-   Font Loading
+   Font Loading — Liminal Batang (KoPub바탕체 서브셋)
+   Subset: Basic Latin, Latin-1, General Punctuation, CJK Symbols,
+   Hangul Compatibility Jamo, Halfwidth/Fullwidth forms and the 2,350
+   KS X 1001 Hangul syllables. Other syllables in U+AC00–D7A3 fall back
+   to the next font in --font-body. License: /fonts/LICENSE-LiminalBatang.md
+   Weight mapping: normal (400) text uses Medium; Light is opt-in (300).
    ======================================== */
 
 @font-face {
-  font-family: "KoPub Batang";
-  src: url("/fonts/KoPubBatang-Light.woff2") format("woff2");
+  font-family: "Liminal Batang";
+  src: url("/fonts/LiminalBatang-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2000-206F, U+3000-303F, U+3131-318E, U+AC00-D7A3, U+FF01-FFEF;
 }
 
 @font-face {
-  font-family: "KoPub Batang";
-  src: url("/fonts/KoPubBatang-Medium.woff2") format("woff2");
-  font-weight: 500;
+  font-family: "Liminal Batang";
+  src: url("/fonts/LiminalBatang-Medium.woff2") format("woff2");
+  font-weight: 400 500;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2000-206F, U+3000-303F, U+3131-318E, U+AC00-D7A3, U+FF01-FFEF;
 }
 
 @font-face {
-  font-family: "KoPub Batang";
-  src: url("/fonts/KoPubBatang-Bold.woff2") format("woff2");
+  font-family: "Liminal Batang";
+  src: url("/fonts/LiminalBatang-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0020-007E, U+00A0-00FF, U+2000-206F, U+3000-303F, U+3131-318E, U+AC00-D7A3, U+FF01-FFEF;
+}
+
+/* ========================================
+   Article body (@tailwindcss/typography)
+   Colors come from the tokens, so dark mode follows automatically.
+   ======================================== */
+
+.prose {
+  --tw-prose-body: var(--color-text-primary);
+  --tw-prose-headings: var(--color-text-primary);
+  --tw-prose-lead: var(--color-text-secondary);
+  --tw-prose-links: var(--color-secondary);
+  --tw-prose-bold: var(--color-text-primary);
+  --tw-prose-counters: var(--color-text-secondary);
+  --tw-prose-bullets: var(--color-text-secondary);
+  --tw-prose-hr: var(--color-divider);
+  --tw-prose-quotes: var(--color-text-secondary);
+  --tw-prose-quote-borders: var(--color-divider);
+  --tw-prose-captions: var(--color-text-secondary);
+  --tw-prose-kbd: var(--color-text-primary);
+  --tw-prose-kbd-shadows: var(--color-divider);
+  --tw-prose-code: var(--color-text-primary);
+  --tw-prose-pre-code: var(--color-text-primary);
+  --tw-prose-pre-bg: var(--color-surface);
+  --tw-prose-th-borders: var(--color-divider);
+  --tw-prose-td-borders: var(--color-divider);
+
+  max-width: none;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 1.35;
+}
+
+.prose :where(h1):not(:where([class~="not-prose"] *)) { font-size: 1.875rem; }
+.prose :where(h2):not(:where([class~="not-prose"] *)) { font-size: 1.5rem; margin-top: 2.4em; }
+.prose :where(h3):not(:where([class~="not-prose"] *)) { font-size: 1.25rem; }
+.prose :where(h4):not(:where([class~="not-prose"] *)) { font-size: 1.0625rem; }
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  font-weight: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+  font-style: normal;
+  font-weight: inherit;
+}
+
+.prose :where(blockquote p:first-of-type)::before,
+.prose :where(blockquote p:last-of-type)::after {
+  content: none;
+}
+
+/* Inline code */
+.prose :where(code):not(:where(pre code, [class~="not-prose"] *)) {
+  font-family: var(--font-code);
+  font-size: 0.875em;
+  font-weight: 500;
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-md);
+  background-color: var(--color-code-bg);
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"] *))::after {
+  content: none;
+}
+
+/* Shiki dual theme (astro.config defaultColor: false → colors arrive as --shiki-light/--shiki-dark) */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+:root[data-theme="dark"] .astro-code,
+:root[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Code blocks */
+.prose :where(pre):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-code);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  border: 1px solid var(--color-divider);
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"] *)) {
+  font-family: inherit;
+  font-size: inherit;
 }
 
 /* ========================================
@@ -82,6 +251,7 @@ body {
 
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {

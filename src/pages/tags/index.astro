@@ -1,31 +1,40 @@
 ---
 import BaseLayout from '@/app/layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import PageTitle from '@/shared/ui/PageTitle.astro';
+import { getPublishedPosts } from '@/shared/lib/posts';
 
-const posts = await getCollection('posts', ({ data }) => !data.draft);
-const tagMap = new Map<string, number>();
-posts.forEach((post) => {
-  post.data.tags.forEach((tag) => {
-    tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
-  });
-});
-const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
+const posts = await getPublishedPosts();
+const tagCounts = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags) {
+    tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+  }
+}
+// 글 수 내림차순, 같으면 이름순
+const tags = [...tagCounts.entries()].sort(
+  (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'ko'),
+);
 ---
 
 <BaseLayout title="Tags" description="태그 목록">
   <div class="max-w-[800px] mx-auto">
-    <h1 class="font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em] mb-8">
-      Tags
-    </h1>
-    <div class="flex flex-wrap gap-3">
-      {tags.map(([tag, count]) => (
-        <a
-          href={`/tags/${tag}/`}
-          class="font-ui text-sm px-4 py-2 rounded-[5px] border border-[var(--color-divider)] text-[var(--color-text-secondary)] no-underline hover:bg-[var(--color-action-hover)] transition-colors"
-        >
-          #{tag} <span class="text-[var(--color-text-disabled)]">({count})</span>
-        </a>
-      ))}
-    </div>
+    <PageTitle>Tags</PageTitle>
+
+    {tags.length === 0 ? (
+      <p class="font-ui text-[var(--color-text-secondary)]">아직 태그가 없습니다.</p>
+    ) : (
+      <ul class="flex flex-wrap gap-1.5">
+        {tags.map(([tag, count]) => (
+          <li>
+            <a
+              href={`/tags/${encodeURIComponent(tag)}/`}
+              class="block font-ui text-sm px-2 py-1 rounded-[5px] border border-[var(--color-divider)] text-[var(--color-text-secondary)] no-underline hover:bg-[var(--color-action-hover)] transition-colors"
+            >
+              #{tag} <span class="text-[var(--color-text-secondary)]">({count})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
 </BaseLayout>

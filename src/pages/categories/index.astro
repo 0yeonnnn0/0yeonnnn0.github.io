@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@/app/layouts/BaseLayout.astro';
+import PageTitle from '@/shared/ui/PageTitle.astro';
+import { CATEGORIES } from '@/data/categories';
+import { getPublishedPosts } from '@/shared/lib/posts';
+
+const posts = await getPublishedPosts();
+// 정의된 카테고리 순서를 유지하고, 공개 글이 없는 카테고리는 뺀다.
+const categories = CATEGORIES.map((category) => ({
+  category,
+  count: posts.filter((p) => p.data.category === category).length,
+})).filter(({ count }) => count > 0);
+---
+
+<BaseLayout title="Categories" description="카테고리 목록">
+  <div class="max-w-[800px] mx-auto">
+    <PageTitle>Categories</PageTitle>
+
+    {categories.length === 0 ? (
+      <p class="font-ui text-[var(--color-text-secondary)]">아직 작성된 글이 없습니다.</p>
+    ) : (
+      <ul class="flex flex-wrap gap-1.5">
+        {categories.map(({ category, count }) => (
+          <li>
+            <a
+              href={`/categories/${encodeURIComponent(category)}/`}
+              class="block font-ui text-sm px-2 py-1 rounded-[5px] border border-[var(--color-divider)] text-[var(--color-text-secondary)] no-underline hover:bg-[var(--color-action-hover)] transition-colors"
+            >
+              {category} <span class="text-[var(--color-text-secondary)]">({count})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</BaseLayout>

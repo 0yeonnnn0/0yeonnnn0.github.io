@@ -1,9 +1,10 @@
 ---
 import '@/app/styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import SEO from '@/widgets/seo/SEO.astro';
 import Header from '@/widgets/header/Header.astro';
 import Footer from '@/widgets/footer/Footer.astro';
+import { SITE } from '@/shared/config/site';
 
 interface Props {
   title?: string;
@@ -11,9 +12,10 @@ interface Props {
   ogImage?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
+  noindex?: boolean;
 }
 
-const { title, description, ogImage, type, publishedTime } = Astro.props;
+const { title, description, ogImage, type, publishedTime, noindex } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,25 +23,54 @@ const { title, description, ogImage, type, publishedTime } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FAF9F5" />
+    <!-- Apply the theme before first paint (no flash) and after every client-side navigation.
+         Keep in sync with src/features/theme/theme.ts. -->
+    <script is:inline>
+      (function () {
+        if (window.__themeInit) return;
+        window.__themeInit = true;
+        var colors = { light: '#FAF9F5', dark: '#1F1E1C' };
+        var media = window.matchMedia('(prefers-color-scheme: dark)');
+        function stored() {
+          try {
+            var value = localStorage.getItem('theme');
+            return value === 'light' || value === 'dark' ? value : null;
+          } catch (e) {
+            return null;
+          }
+        }
+        function apply() {
+          var theme = stored() || (media.matches ? 'dark' : 'light');
+          document.documentElement.dataset.theme = theme;
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', colors[theme]);
+        }
+        apply();
+        document.addEventListener('astro:after-swap', apply);
+        media.addEventListener('change', function () {
+          if (stored()) return;
+          apply();
+          document.dispatchEvent(new Event('theme:change'));
+        });
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/fonts/LiminalBatang-Medium.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
     <SEO
       title={title}
       description={description}
       ogImage={ogImage}
       type={type}
       publishedTime={publishedTime}
+      noindex={noindex}
     />
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
-    <main class="flex-1 w-full max-w-[1200px] mx-auto pt-32 pb-12 px-4 sm:px-6">
+    <main class="flex-1 w-full max-w-[1200px] mx-auto pt-16 pb-6 px-2 sm:px-3">
       <slot />
     </main>
     <Footer />

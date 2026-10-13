@@ -1,5 +1,5 @@
 /** 인기글 수동 큐레이션 목록 (slug 기준, 최대 10개) */
-export const STEADY_SELLERS: string[] = [
+export const STEADY_SELLERS = [
   'rest-api-design',
   'react-server-components',
   'typescript-type-narrowing',
@@ -10,4 +10,4 @@ export const STEADY_SELLERS: string[] = [
   'binary-search-variations',
   'http-caching-strategy',
   'hello-world',
-];
+] as const satisfies readonly string[];

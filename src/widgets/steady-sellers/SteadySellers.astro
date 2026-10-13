@@ -1,35 +1,38 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPublishedPosts, type Post } from '@/shared/lib/posts';
 import { STEADY_SELLERS } from '@/data/steady-sellers';
 
-const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const postsById = new Map((await getPublishedPosts()).map((post) => [post.id, post]));
 const steadyPosts = STEADY_SELLERS
   .slice(0, 10)
-  .map((slug) => allPosts.find((p) => p.id === slug))
-  .filter(Boolean);
+  .map((slug) => postsById.get(slug))
+  .filter((post): post is Post => post !== undefined);
 ---
 
 {steadyPosts.length > 0 && (
   <section>
-    <h2 class="font-body text-[1.5rem] font-bold leading-[1.6] mb-6">
+    <h2 class="font-body text-[1.5rem] font-bold leading-[1.6] mb-3">
       Steady Sellers
     </h2>
-    <ol class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0">
+    <ol class="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-0">
       {steadyPosts.map((post, i) => (
         <li>
           <a
-            href={`/posts/${post!.id}/`}
-            class="flex items-center gap-8 px-5 py-5 rounded-[5px] no-underline transition-colors duration-200 ease-in-out hover:bg-[rgba(0,0,0,0.03)]"
+            href={`/posts/${post.id}/`}
+            class="flex items-center gap-4 px-5 py-5 rounded-[5px] no-underline transition-colors duration-200 ease-in-out hover:bg-[var(--color-row-hover)]"
           >
-            <span class="font-body text-3xl font-light leading-none text-[#e0e0e0] w-10 shrink-0 text-center">
+            <span
+              aria-hidden="true"
+              class="font-body text-3xl font-light leading-none text-[var(--color-text-muted)] w-5 shrink-0 text-center"
+            >
               {i + 1}
             </span>
-            <div class="flex flex-col gap-1 min-w-0">
+            <div class="flex flex-col gap-0.5 min-w-0">
               <span class="font-body text-[1.0rem] font-bold leading-[1.4] text-[var(--color-text-primary)] truncate">
-                {post!.data.title}
+                {post.data.title}
               </span>
               <span class="font-ui text-[0.9rem] leading-[1.3] text-[var(--color-text-secondary)]">
-                {post!.data.category}
+                {post.data.category}
               </span>
             </div>
           </a>

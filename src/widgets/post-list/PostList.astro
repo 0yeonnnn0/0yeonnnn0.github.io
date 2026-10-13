@@ -1,0 +1,38 @@
+---
+import type { Post } from '@/shared/lib/posts';
+import PostListItem from './PostListItem.astro';
+
+interface Props {
+  posts: Post[];
+  /** 2: md 이상에서 2열 그리드 */
+  columns?: 1 | 2;
+  /** 앞에 01, 02… 순번을 붙인 <ol> (책 목차용, 1열 전용) */
+  numbered?: boolean;
+}
+
+const { posts, columns = 1, numbered = false } = Astro.props;
+const List = numbered ? 'ol' : 'ul';
+const twoColumns = columns === 2 && !numbered;
+---
+
+<List class={twoColumns ? 'grid grid-cols-1 md:grid-cols-2 gap-1' : 'flex flex-col'}>
+  {posts.map((post, i) => (
+    <li class:list={['border-t border-[var(--color-divider)] first:border-t-0', twoColumns && 'md:border-t-0']}>
+      {numbered ? (
+        <div class="flex items-start gap-2 py-1">
+          <span
+            aria-hidden="true"
+            class="font-ui text-lg font-extrabold text-[var(--color-text-muted)] min-w-4 pt-2 text-right"
+          >
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div class="flex-1">
+            <PostListItem post={post} />
+          </div>
+        </div>
+      ) : (
+        <PostListItem post={post} />
+      )}
+    </li>
+  ))}
+</List>

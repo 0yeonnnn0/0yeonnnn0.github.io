@@ -1,0 +1,12 @@
+---
+interface Props {
+  /** 아래 여백 등 추가 클래스 (기본 mb-4) */
+  class?: string;
+}
+
+const { class: className = 'mb-4' } = Astro.props;
+---
+
+<h1 class:list={['font-display text-[clamp(2rem,3.5vw,2.5rem)] font-semibold leading-[1.2] tracking-[-0.012em]', className]}>
+  <slot />
+</h1>

@@ -1,55 +1,61 @@
 ---
+import { Image } from 'astro:assets';
+import type { Post } from '@/shared/lib/posts';
+import { formatDate } from '@/shared/lib/date';
+
 interface Props {
-  id: string;
-  title: string;
-  description: string;
-  date: Date;
-  category: string;
-  tags: string[];
-  thumbnail?: string;
+  post: Post;
 }
 
-const { id, title, description, date, category, tags, thumbnail } = Astro.props;
-
-const formattedDate = date.toLocaleDateString('ko-KR', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const { post } = Astro.props;
+const { title, description, date, category, thumbnail } = post.data;
+// 초안은 dev에서만 노출된다(프로덕션 빌드에서는 getPublishedPosts가 제외).
+const isDraft = import.meta.env.DEV && post.data.draft;
 ---
 
-<article class="group">
-  <a
-    href={`/posts/${id}/`}
-    class="flex flex-col sm:flex-row gap-3 px-3 py-4 rounded-[12.5px] no-underline transition-colors duration-200 ease-in-out hover:bg-[rgba(0,0,0,0.01)]"
-  >
-    <div class="flex-1 min-w-0 flex flex-col">
-      <span class="font-ui text-[0.85rem] text-[var(--color-text-secondary)]">
-        {category}
-      </span>
-      <h3 class="font-body text-[clamp(1.2rem,2.2vw,1.5rem)] font-bold leading-[1.35] tracking-[-0.016em] text-[var(--color-text-primary)] mt-1">
-        {title}
-      </h3>
-      <p class="font-ui text-[clamp(0.92rem,1.2vw,1rem)] leading-[1.6] text-[var(--color-text-secondary)] mt-1.5 line-clamp-2">
-        {description}
-      </p>
-      <time
-        class="font-ui text-[0.85rem] tracking-[0.01em] text-[var(--color-text-secondary)] mt-5"
-        datetime={date.toISOString()}
+<!--
+  카드 전체가 클릭되도록 제목 링크의 ::after를 카드 위로 펼친다(stretched link).
+  카테고리 링크는 relative z-10으로 그 위에 올려 따로 클릭된다. (<a> 중첩 금지)
+-->
+<article class="group relative flex flex-col sm:flex-row gap-3 px-3 py-4 rounded-[12.5px] transition-colors duration-200 ease-in-out hover:bg-[var(--color-row-hover)]">
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div class="relative z-10 self-start flex items-center gap-1.5">
+      <a
+        href={`/categories/${encodeURIComponent(category)}/`}
+        class="font-ui text-[0.85rem] text-[var(--color-text-secondary)] no-underline hover:underline"
       >
-        {formattedDate}
-      </time>
+        {category}
+      </a>
+      {isDraft && <span class="font-ui text-xs uppercase tracking-wide border border-[var(--color-divider)] rounded-[2.5px] px-1.5 text-[var(--color-text-secondary)]">Draft</span>}
     </div>
+    <h3 class="font-body text-[clamp(1.2rem,2.2vw,1.5rem)] font-bold leading-[1.35] tracking-[-0.016em] text-[var(--color-text-primary)] mt-1">
+      <a
+        href={`/posts/${post.id}/`}
+        class="no-underline after:absolute after:inset-0 after:rounded-[12.5px]"
+      >
+        {title}
+      </a>
+    </h3>
+    <p class="font-ui text-[clamp(0.92rem,1.2vw,1rem)] leading-[1.6] text-[var(--color-text-secondary)] mt-1.5 line-clamp-2">
+      {description}
+    </p>
+    <time
+      class="font-ui text-[0.85rem] tracking-[0.01em] text-[var(--color-text-secondary)] mt-5"
+      datetime={date.toISOString()}
+    >
+      {formatDate(date)}
+    </time>
+  </div>
 
-    {thumbnail && (
-      <div class="sm:w-44 sm:flex-shrink-0 order-first sm:order-last self-center">
-        <img
-          src={thumbnail}
-          alt={title}
-          class="w-full sm:w-44 aspect-[1.85/1] sm:aspect-[1/1] object-cover rounded-[2.5px]"
-          loading="lazy"
-        />
-      </div>
-    )}
-  </a>
+  {thumbnail && (
+    <div class="sm:w-44 sm:flex-shrink-0 order-first sm:order-last self-center">
+      <Image
+        src={thumbnail}
+        alt=""
+        widths={[352, 704]}
+        sizes="(min-width: 640px) 176px, 100vw"
+        class="w-full sm:w-44 aspect-[1.85/1] sm:aspect-[1/1] object-cover rounded-[2.5px]"
+      />
+    </div>
+  )}
 </article>

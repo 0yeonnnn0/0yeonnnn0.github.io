@@ -1,6 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
-import PostListItem from './PostListItem.astro';
+import { getPublishedPosts } from '@/shared/lib/posts';
+import PostList from './PostList.astro';
 
 interface Props {
   limit?: number;
@@ -8,9 +8,7 @@ interface Props {
 
 const { limit = 6 } = Astro.props;
 
-const posts = (await getCollection('posts', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, limit);
+const posts = (await getPublishedPosts()).slice(0, limit);
 ---
 
 {posts.length > 0 && (
@@ -18,20 +16,6 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft))
     <h2 class="font-body text-[1.5rem] font-bold leading-[1.6] mb-3">
       Recent Posts
     </h2>
-    <div class="flex flex-col">
-      {posts.map((post) => (
-        <div class="border-t border-[var(--color-divider)] first:border-t-0">
-          <PostListItem
-            id={post.id}
-            title={post.data.title}
-            description={post.data.description}
-            date={post.data.date}
-            category={post.data.category}
-            tags={post.data.tags}
-            thumbnail={post.data.thumbnail}
-          />
-        </div>
-      ))}
-    </div>
+    <PostList posts={posts} />
   </section>
 )}

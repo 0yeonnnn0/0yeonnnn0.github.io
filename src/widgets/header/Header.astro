@@ -1,105 +1,176 @@
 ---
+import ThemeToggle from '@/features/theme/ThemeToggle.astro';
+
 const pathname = Astro.url.pathname;
 
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/posts/', label: 'Posts' },
   { href: '/books/', label: 'Books' },
+  { href: '/tags/', label: 'Tags' },
   { href: '/about/', label: 'About' },
 ];
+
+const isActive = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
 ---
 
+<!-- Background spans the full width; the nav stays aligned to the 1000px column. -->
 <header
-  class="fixed top-0 left-1/2 z-300 -translate-x-1/2 w-full max-w-[1000px] h-12 flex items-center justify-end px-4 pt-[4px]"
-  style="background: var(--color-header-bg); backdrop-filter: blur(3px);"
+  class="fixed top-0 inset-x-0 z-300 h-12"
+  style="background: var(--color-header-bg); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);"
 >
-  <nav class="hidden sm:flex items-center gap-6">
-    {navLinks.map(({ href, label }) => (
-      <a
-        href={href}
-        class:list={[
-          'font-body text-[1.05rem] tracking-wide text-[var(--color-text-secondary)] no-underline hover:underline transition-colors',
-          { 'text-[var(--color-text-primary)] font-medium': href === '/' ? pathname === '/' : pathname.startsWith(href) },
-        ]}
-      >
-        {label}
-      </a>
-    ))}
-    <!-- Dark mode toggle (placeholder) -->
+  <div class="w-full max-w-[1000px] h-full mx-auto flex items-center justify-end px-4 pt-[4px]">
+    <nav class="hidden sm:flex items-center gap-6" aria-label="주요 메뉴">
+      {navLinks.map(({ href, label }) => (
+        <a
+          href={href}
+          aria-current={isActive(href) ? 'page' : undefined}
+          class:list={[
+            'font-body text-[1.05rem] tracking-wide text-[var(--color-text-secondary)] no-underline hover:underline transition-colors',
+            { 'text-[var(--color-text-primary)] font-medium': isActive(href) },
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+      <ThemeToggle />
+    </nav>
+
+    <!-- Mobile hamburger -->
     <button
-      class="flex items-center justify-center size-11 rounded-full hover:bg-[var(--color-action-hover)] transition-colors duration-150"
-      aria-label="다크모드 토글"
+      id="mobile-menu-btn"
+      type="button"
+      class="sm:hidden flex items-center justify-center size-11 rounded-full hover:bg-[var(--color-action-hover)] transition-colors duration-150"
+      aria-label="메뉴 열기"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5" />
-        <line x1="12" y1="1" x2="12" y2="3" />
-        <line x1="12" y1="21" x2="12" y2="23" />
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-        <line x1="1" y1="12" x2="3" y2="12" />
-        <line x1="21" y1="12" x2="23" y2="12" />
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="18" x2="21" y2="18" />
       </svg>
     </button>
-  </nav>
-
-  <!-- Mobile hamburger -->
-  <button
-    id="mobile-menu-btn"
-    class="sm:hidden flex items-center justify-center size-11 rounded-full hover:bg-[var(--color-action-hover)] transition-colors duration-150"
-    aria-label="메뉴 열기"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="3" y1="12" x2="21" y2="12" />
-      <line x1="3" y1="6" x2="21" y2="6" />
-      <line x1="3" y1="18" x2="21" y2="18" />
-    </svg>
-  </button>
+  </div>
 </header>
 
-<!-- Mobile menu overlay -->
+<!-- Mobile menu overlay (above the header so its close button is reachable) -->
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-299 hidden flex-col items-center justify-center gap-5"
+  class="fixed inset-0 z-400 hidden flex-col items-center justify-center gap-5"
   style="background: var(--color-bg);"
+  role="dialog"
+  aria-modal="true"
+  aria-label="메뉴"
+  tabindex="-1"
 >
   <button
     id="mobile-menu-close"
+    type="button"
     class="absolute top-5 right-4 size-11 flex items-center justify-center rounded-full hover:bg-[var(--color-action-hover)]"
     aria-label="메뉴 닫기"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <line x1="18" y1="6" x2="6" y2="18" />
       <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
   </button>
 
-  {navLinks.map(({ href, label }) => (
-    <a
-      href={href}
-      class:list={[
-        'font-body text-2xl text-[var(--color-text-primary)] no-underline',
-        { 'font-medium': href === '/' ? pathname === '/' : pathname.startsWith(href) },
-      ]}
-    >
-      {label}
-    </a>
-  ))}
+  <nav class="flex flex-col items-center gap-5" aria-label="주요 메뉴">
+    {navLinks.map(({ href, label }) => (
+      <a
+        href={href}
+        aria-current={isActive(href) ? 'page' : undefined}
+        class:list={[
+          'font-body text-2xl text-[var(--color-text-primary)] no-underline',
+          { 'font-medium': isActive(href) },
+        ]}
+      >
+        {label}
+      </a>
+    ))}
+  </nav>
+
+  <ThemeToggle />
 </div>
 
 <script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  const closeBtn = document.getElementById('mobile-menu-close');
+  const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  const desktop = window.matchMedia('(min-width: 640px)');
+  let closeMenu: ((restoreFocus?: boolean) => void) | null = null;
 
-  btn?.addEventListener('click', () => {
-    menu?.classList.remove('hidden');
-    menu?.classList.add('flex');
+  function initMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('mobile-menu-close');
+    // The header is swapped on every client-side navigation; bind each new DOM once.
+    if (!btn || !menu || !closeBtn || btn.dataset.bound) return;
+    btn.dataset.bound = 'true';
+
+    const isOpen = () => !menu.classList.contains('hidden');
+
+    function open() {
+      menu!.classList.remove('hidden');
+      menu!.classList.add('flex');
+      btn!.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('keydown', onKeydown);
+      closeBtn!.focus();
+    }
+
+    function close(restoreFocus = true) {
+      if (!isOpen()) return;
+      document.removeEventListener('keydown', onKeydown);
+      menu!.classList.add('hidden');
+      menu!.classList.remove('flex');
+      btn!.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      if (restoreFocus) btn!.focus();
+    }
+
+    btn.addEventListener('click', open);
+    closeBtn.addEventListener('click', () => close());
+
+    menu.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('a[href]')) close(false);
+    });
+
+    // Esc + Tab trap live on document while open, so they still work if focus fell to <body>.
+    function onKeydown(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        close();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      // Simple focus trap: wrap between the first and last focusable elements.
+      const items = Array.from(menu!.querySelectorAll<HTMLElement>(FOCUSABLE));
+      const first = items[0];
+      const last = items[items.length - 1];
+      const active = document.activeElement;
+      if (!menu!.contains(active) || active === menu) {
+        // Focus is outside the overlay (or on the overlay itself): pull it back in.
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    closeMenu = close;
+  }
+
+  // Close the overlay if the viewport grows past the mobile breakpoint.
+  desktop.addEventListener('change', (event) => {
+    if (event.matches) closeMenu?.(false);
   });
 
-  closeBtn?.addEventListener('click', () => {
-    menu?.classList.add('hidden');
-    menu?.classList.remove('flex');
-  });
+  // The header DOM is replaced on navigation: close first so the document keydown listener is removed.
+  document.addEventListener('astro:before-swap', () => closeMenu?.(false));
+  document.addEventListener('astro:page-load', initMobileMenu);
 </script>

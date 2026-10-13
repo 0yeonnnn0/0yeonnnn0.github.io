@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://dusehd1.github.io',
+  site: 'https://0yeonnnn0.github.io',
   integrations: [react(), mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
